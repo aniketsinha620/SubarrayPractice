@@ -1,0 +1,42 @@
+Given an array of N positive integers  Arr1, Arr2 ............ Arrn. The value of each contiguous subarray of given array is the maximum element present in that subarray. The task is to return the number of subarrays having value strictly greater than K.
+
+Example 1:
+
+Input:
+N = 3, K = 2
+Arr[] = {3, 2, 1}
+Output: 3
+Explanation: The subarrays having value
+strictly greater than K are: [3], [3, 2]
+and [3, 2, 1]. Thus there are 3 such
+subarrays.
+N = 4, K = 1
+Arr[] = {1, 2, 3, 4}
+Output: 9
+Explanation: There are 9 subarrays having
+value strictly greater than K.
+
+Question:-https://www.geeksforgeeks.org/problems/count-of-subarrays5922/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+
+approch:-o(n)
+-> The key observation is that every time we encounter an element greater than K, it forms subarrays that start from any previous position and extend up to the current element.
+-> If the current element is greater than K, it adds to the count of subarrays starting from index 0 up to the current index.
+-> If we haven't encountered a greater element, we can add subarrays that extend from the previous occurrence of a greater element.
+
+
+ll countSubarray(int arr[], int n, int k) {
+    ll count = 0, last_greater = -1;
+    
+    for (int i = 0; i < n; i++) {
+        if (arr[i] > k) {
+            // If current element is greater than k, count all subarrays ending at 'i'
+            count += (i + 1);
+            last_greater = i;
+        } else if (last_greater != -1) {
+            // Add subarrays that extend from the last greater element
+            count += (last_greater + 1);
+        }
+    }
+    
+    return count;
+}
