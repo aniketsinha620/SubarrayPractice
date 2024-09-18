@@ -1,0 +1,44 @@
+Given an array arr[] of positive integers, the task is the find the length of the longest sub-array with the maximum possible GCD value.
+
+
+Examples:  
+
+Input: arr[] = {1, 2, 2} 
+Output: 2 
+Here all possible sub-arrays and there GCD’s are: 
+1) {1} -> 1 
+2) {2} -> 2 
+3) {2} -> 2 
+4) {1, 2} -> 1 
+5) {2, 2} -> 2 
+6) {1, 2, 3} -> 1 
+Here, the maximum GCD value is 2 and longest sub-array having GCD = 2 is {2, 2}. 
+Thus, the answer is {2, 2}.
+
+
+approch:-0(n)
+The maximum GCD value will always be equal to the largest number present in the array. Let’s say that the largest number present in the array is X. Now, the task is to find the largest sub-array having all X. The same can be done a single traversal of the input array.
+
+int findLength(int *arr, int n)
+{
+    int x = *max_element(arr, arr + n);
+
+   
+
+    int count = 0, ans = 0;
+    for (int i = 0; i < n; i++)
+    {
+
+        if (arr[i] == x)
+        {
+            count++;
+            ans = max(ans, count);
+        }
+        else
+        {
+            count = 0;
+        }
+    }
+
+    return ans;
+}
