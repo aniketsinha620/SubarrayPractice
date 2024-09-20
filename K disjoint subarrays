@@ -1,0 +1,90 @@
+->Split array into K disjoint subarrays such that sum of each subarray is odd.
+
+->Given an array arr[] containing N elements, the task is to divide the array into K(1 ? K ? N) subarrays and such that the sum of elements of each subarray is odd. Print the starting index (1 based indexing) of each subarray after dividing the array and -1 if no such subarray exists.
+Note: For all subarrays S1, S2, S3, …, SK: 
+
+The intersection of S1, S2, S3, …, SK should be NULL.
+The union of S1, S2, S3, …, SK should be equal to the array.
+Examples:  
+
+Input: N = 5, arr[] = {7, 2, 11, 4, 19}, K = 3 
+Output: 1 3 5 
+Explanation: 
+When the given array arr[] is divided into K = 3 parts, the possible subarrays are: {7, 2}, {11, 4} and {19} 
+Input: N = 5, arr[] = {2, 4, 6, 8, 10}, K = 3 
+Output: -1 
+Explanation: 
+It is impossible to divide the array arr[] into K = 3 subarrays as all the elements are even and the sum of every subarray is even. 
+
+
+
+->Approach: It can be easily observed that for any subarray to have odd sum: 
+
+Since only odd values can lead to odd sum, hence we can ignore the even values.
+The number of odd values must also be odd.
+So we need at least K odd values in the array for K subarrays. If K is greater than the number of odd elements then the answer is always -1.
+Below is the implementation of the above approach: 
+
+// C++ program to split the array into K
+// disjoint subarrays so that the sum of
+// each subarray is odd.
+
+#include <iostream>
+using namespace std;
+
+// Function to split the array into K
+// disjoint subarrays so that the sum of
+// each subarray is odd.
+void split(int a[], int n, int k)
+{
+	// Number of odd elements
+	int odd_ele = 0;
+
+	// Loop to store the number
+	// of odd elements in the array
+	for (int i = 0; i < n; i++)
+		if (a[i] % 2)
+			odd_ele++;
+
+	// If the count of odd elements is < K
+	// then the answer doesnt exist
+	if (odd_ele < k)
+		cout << -1;
+
+	// If the number of odd elements is
+	// greater than K and the extra
+	// odd elements are odd, then the
+	// answer doesn't exist
+	else if (odd_ele > k && (odd_ele - k) % 2)
+		cout << -1;
+
+	else {
+		for (int i = 0; i < n; i++) {
+			if (a[i] % 2) {
+
+				// Printing the position of
+				// odd elements
+				cout << i + 1 << " ";
+
+				// Decrementing K as we need positions
+				// of only first k odd numbers
+				k--;
+			}
+
+			// When the positions of the first K
+			// odd numbers are printed
+			if (k == 0)
+				break;
+		}
+	}
+}
+
+// Driver code
+int main()
+{
+	int n = 5;
+	int arr[] = { 7, 2, 11, 4, 19 };
+	int k = 3;
+
+	split(arr, n, k);
+}
