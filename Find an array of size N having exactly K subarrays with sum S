@@ -1,0 +1,32 @@
+Given three integers N, K and S, the task is to choose an array of size N such that there exists exactly K sub-arrays with sum S.
+Note: There can be many solution arrays to this problem.
+Examples: 
+ 
+
+Input: N = 4, K = 2, S = 3 
+Output: 1 2 3 4 
+Explanation: 
+One of the possible array is [ 1, 2, 3, 4 ] 
+There exist exactly two subarrays with sum 3 
+Subarrays with Sum(3) = [ [ 1, 2 ], [ 3 ] ]
+Input: N = 5, K = 3, S = 50 
+Output: 25 25 25 10 40 
+Explanation: 
+One of the possible array is [ 25, 25, 25, 10, 40 ] 
+There exist exactly three subarrays with sum 50 
+Subarrays with Sum(50) = [ [ 25, 25 ], [ 25, 25 ], [ 10, 40 ] ] 
+
+
+Approach: 
+One of the Solution Array for this problem contains S element K times and S+1 element (N-K) times, to form K Sub-arrays of exactly one element with S as sum. If we combine any two or more elements of the array then it will give sum greater than S.
+Below is the implementation of the above approach: 
+
+
+
+void SubarraysWithSumS(int n, int k, int s) 
+{ 
+    for(int i=0;i<k;i++) 
+        cout << s << " "; 
+    for(int i=k;i<n;i++) 
+        cout << s+1 << " "; 
+}  
