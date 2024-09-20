@@ -1,0 +1,44 @@
+Given an array a[] of N integers, the task is to find the length of the longest Alternating Even Odd subarray present in the array. 
+
+Examples: 
+
+Input: a[] = {1, 2, 3, 4, 5, 7, 9} 
+Output: 5 
+Explanation: 
+The subarray {1, 2, 3, 4, 5} has alternating even and odd elements.
+
+Input: a[] = {1, 3, 5} 
+Output: 0 
+Explanation: 
+There is no such alternating sequence possible. 
+
+
+
+Code:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+
+	vector<int> arr = {1, 3, 5};
+	int n = arr.size();
+	vector<int> dp(n, 1);
+	int maxi = 1;
+	for (int i = 1; i < n; i++)
+	{
+
+		if ((arr[i] % 2 == 0 && arr[i - 1] % 2 != 0) || (arr[i] % 2 != 0 && arr[i - 1] % 2 == 0))
+			dp[i] = dp[i - 1] + 1;
+
+		maxi = max(maxi, dp[i]);
+	}
+
+	if (maxi != 1)
+		cout << maxi << endl;
+	else
+		cout << "0" << endl;
+
+	return 0;
+}
